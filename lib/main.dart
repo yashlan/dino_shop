@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:dino_shop/home_screen.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Green Planet',
+      title: 'Dino Shop',
       theme: ThemeData(
         fontFamily: 'RobotoMedium',
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen()
     );
   }
 }
