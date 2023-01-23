@@ -235,4 +235,12 @@ var dinoList = [
       isPopular: true,
       desc:
           'Velociraptor is a genus of dromaeosaurid dinosaur that lived during the Late Cretaceous period, around 75 to 71 million years ago. Despite being popularized in media as a large, intelligent and highly aggressive predator, in reality Velociraptor was a relatively small dinosaur, measuring about 6 feet (1.8 m) in length and weighing around 15 kg. They were bipedal and had a large sickle-shaped claw on each foot.'),
+  Dino(
+      imageAsset: 'images/dinos/brachiosaurus.png',
+      name: 'Brachiosaurus',
+      price: '599.99',
+      category: Category.herbivora,
+      isPopular: true,
+      desc:
+          'Brachiosaurus is a genus of sauropod dinosaur that lived during the Late Jurassic period, around 150-145 million years ago. It was one of the largest land animals that ever existed, with some individuals estimated to have reached lengths of up to 85 feet (26 m) and heights of up to 22 feet (7 m) at the shoulder. Brachiosaurus is known for its long neck and front limbs that were longer than its hind limbs.'),
 ];
