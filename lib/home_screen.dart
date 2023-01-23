@@ -1,8 +1,9 @@
+import 'package:dino_shop/utils/constant.dart';
+import 'package:dino_shop/utils/show_alert_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dino_shop/model/dino_list.dart';
 import 'package:dino_shop/detail_screen.dart';
-
-final int primaryColor = const Color(0xFF00B761).value;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,18 +13,16 @@ class HomeScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Column(
-              children: [
-                HeaderAndSearch(),
-                const TabCategoryList(),
-              ],
-            ),
-            const Expanded(
-              child: DinoPlaceGrid(gridCount: 2),
-            ),
-          ],
+        body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth <= 600) {
+              return buildAllComponents(size, 2);
+            } else if (constraints.maxWidth <= 1200) {
+              return buildAllComponents(size, 3);
+            } else {
+              return buildAllComponents(size, 4);
+            }
+          },
         ),
         bottomNavigationBar: const BottomNavBar(),
       ),
@@ -31,12 +30,20 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Future<void> showAlertDialog(BuildContext context, String msg) {
-  return showDialog(
-    context: context,
-    builder: (BuildContext context) => AlertDialog(
-      content: Text(msg),
-    ),
+Widget buildAllComponents(Size size, int gridCount) {
+  return Column(
+    children: <Widget>[
+      Column(
+        children: [
+          //Text('size width: ${size.width}'),
+          HeaderAndSearch(),
+          const TabCategoryList(),
+        ],
+      ),
+      Expanded(
+        child: DinoPlaceGrid(gridCount: gridCount),
+      ),
+    ],
   );
 }
 
@@ -53,11 +60,10 @@ class HeaderAndSearch extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: size.height * 0.2,
+            height: size.height * 0.15,
             child: Stack(
               children: <Widget>[
                 SizedBox(
-                  height: size.height * 0.2 - 27,
                   child: Row(
                     children: <Widget>[
                       RichText(
@@ -75,26 +81,20 @@ class HeaderAndSearch extends StatelessWidget {
                               text: 'Dino Shop',
                               style: TextStyle(
                                   fontSize: 43,
-                                  color: Color(primaryColor),
+                                  color: Color(secondaryColor),
                                   fontFamily: 'RobotoBold'),
                             ),
                           ],
                         ),
                       ),
                       const Spacer(),
-                      Transform.scale(
-                        scale: 1.2,
-                        child: IconButton(
-                          splashRadius: 1,
-                          alignment: Alignment.topRight,
-                          icon: Image.asset(
-                            'images/icons/icon_cart.png',
-                            width: 500,
-                            height: 50,
-                          ),
-                          onPressed: () => showAlertDialog(
-                              (context), 'anda mengklik cart button'),
-                        ),
+                      IconButton(
+                        iconSize: 27,
+                        splashRadius: 15,
+                        alignment: Alignment.topRight,
+                        icon: const Icon(Icons.shopping_cart),
+                        onPressed: () => showAlertDialog(
+                            (context), 'anda mengklik cart button'),
                       ),
                     ],
                   ),
@@ -173,7 +173,7 @@ class TabCategoryListState extends State<TabCategoryList>
       child: TabBar(
         controller: _tabController,
         indicatorColor: Colors.transparent,
-        labelColor: const Color(0xFF00B761),
+        labelColor: Color(secondaryColor),
         unselectedLabelColor: Colors.grey.withOpacity(0.5),
         labelPadding: const EdgeInsets.symmetric(horizontal: 35),
         isScrollable: true,
@@ -234,6 +234,7 @@ class DinoPlaceGrid extends StatelessWidget {
                 }));
               },
               child: Card(
+                surfaceTintColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
@@ -316,23 +317,24 @@ class BottomNavBarState extends State<BottomNavBar> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'null',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.assignment),
-          label: 'null',
+          icon: Icon(Icons.live_tv),
+          label: 'Live',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.mail),
-          label: 'null',
+          icon: Icon(Icons.shopping_cart_checkout),
+          label: 'My Order',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'wkwk',
+          label: 'Profile',
         ),
       ],
       currentIndex: 0,
-      selectedItemColor: Colors.green,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Color(secondaryColor),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
     );
