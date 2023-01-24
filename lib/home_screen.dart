@@ -1,6 +1,5 @@
 import 'package:dino_shop/utils/constant.dart';
 import 'package:dino_shop/utils/show_alert_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dino_shop/model/dino_list.dart';
 import 'package:dino_shop/detail_screen.dart';
@@ -233,66 +232,68 @@ class DinoPlaceGrid extends StatelessWidget {
                   return DetailScreen(dino: dino);
                 }));
               },
-              child: Card(
-                surfaceTintColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: BorderSide(
-                    width: 2.5,
-                    color: Color(primaryColor),
+              child: Expanded(
+                child: Card(
+                  surfaceTintColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      width: 2.5,
+                      color: Color(primaryColor),
+                    ),
                   ),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Image.asset(
-                        dino.imageAsset,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(12),
-                          bottomRight: Radius.circular(12),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: Image.asset(
+                          dino.imageAsset,
+                          fit: BoxFit.fill,
                         ),
-                        color: Color(primaryColor),
                       ),
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: [
-                              Text(
-                                dino.name,
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontFamily: 'RobotoBold',
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
                           ),
-                          const SizedBox(height: 1),
-                          Row(
-                            children: <Widget>[
-                              const Icon(Icons.monetization_on,
-                                  color: Colors.white),
-                              Text(
-                                dino.price,
-                                style: const TextStyle(
-                                  fontSize: 14.0,
-                                  fontFamily: 'RobotoMedium',
-                                  color: Colors.white,
+                          color: Color(primaryColor),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: [
+                                Text(
+                                  dino.name,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'RobotoBold',
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                            const SizedBox(height: 1),
+                            Row(
+                              children: <Widget>[
+                                const Icon(Icons.monetization_on,
+                                    color: Colors.white),
+                                Text(
+                                  dino.price,
+                                  style: const TextStyle(
+                                    fontSize: 14.0,
+                                    fontFamily: 'RobotoMedium',
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );
@@ -304,13 +305,15 @@ class DinoPlaceGrid extends StatelessWidget {
 }
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => BottomNavBarState();
 }
 
 class BottomNavBarState extends State<BottomNavBar> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -332,11 +335,14 @@ class BottomNavBarState extends State<BottomNavBar> {
           label: 'Profile',
         ),
       ],
-      currentIndex: 0,
+      currentIndex: _currentIndex,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Color(secondaryColor),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
+      onTap: (index) => setState(() {
+        _currentIndex = index;
+      }),
     );
   }
 }
