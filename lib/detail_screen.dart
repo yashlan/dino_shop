@@ -129,129 +129,131 @@ class DetailDino extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: Color(primaryColor),
-              height: (size.height / 2) + additionalHeight,
-              child: Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  dino.imageAsset,
-                  fit: BoxFit.cover,
-                  width: imageSize,
-                  height: imageSize,
+        child: Expanded(
+          child: Column(
+            children: [
+              Container(
+                color: Color(primaryColor),
+                height: (size.height / 2) + additionalHeight,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    dino.imageAsset,
+                    fit: BoxFit.cover,
+                    width: imageSize,
+                    height: imageSize,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: (size.height / 2) + (kIsWeb ? 100 : 30),
-              child: Stack(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: paddingHorizCardDesc,
-                      right: paddingHorizCardDesc,
-                    ),
-                    height: 400,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(25),
-                          child: Row(
-                            children: <Widget>[
-                              Image.asset('images/icons/icon_line.png'),
-                              const SizedBox(width: 10),
-                              Text(
-                                dino.category.name.toUpperCase(),
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color(primaryColor),
-                                  fontFamily: 'RobotoBold',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                dino.name,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  color: Color(secondaryColor),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
+              SizedBox(
+                height: (size.height / 2) + (kIsWeb ? 100 : 30),
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: paddingHorizCardDesc,
+                        right: paddingHorizCardDesc,
+                      ),
+                      height: 400,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(25),
+                            child: Row(
+                              children: <Widget>[
+                                Image.asset('images/icons/icon_line.png'),
+                                const SizedBox(width: 10),
+                                Text(
+                                  dino.category.name.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color(primaryColor),
+                                    fontFamily: 'RobotoBold',
                                   ),
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    r'$' + dino.price,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  dino.name,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                Container(
+                                  width: 100,
+                                  height: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color(secondaryColor),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      bottomLeft: Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      r'$' + dino.price,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 15,
-                            right: 15,
-                            top: 15,
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: const <Widget>[
-                                  Text(
-                                    textAlign: TextAlign.start,
-                                    'Description',
-                                    style: TextStyle(
-                                      fontSize: 18,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 15,
+                              right: 15,
+                              top: 15,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: const <Widget>[
+                                    Text(
+                                      textAlign: TextAlign.start,
+                                      'Description',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                textAlign: TextAlign.start,
-                                dino.desc,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'RobotoRegular',
-                                  color: Color(0xFF000000),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                const SizedBox(height: 10),
+                                Text(
+                                  textAlign: TextAlign.start,
+                                  dino.desc,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'RobotoRegular',
+                                    color: Color(0xFF000000),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const ButtonBuyAndAmountCounter(),
-                      ],
+                          const ButtonBuyAndAmountCounter(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
