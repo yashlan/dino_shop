@@ -13,7 +13,7 @@ class DetailScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         var mw = constraints.maxWidth;
-        if (mw <= 360) {
+        if (mw < 360) {
           return DetailDino(
             dino: dino,
             imageSize: 280,
@@ -115,6 +115,7 @@ class DetailDino extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(primaryColor),
       appBar: AppBar(
+        //title: Text(size.width.toString()),
         backgroundColor: Color(primaryColor),
         elevation: 0,
         leading: Padding(
