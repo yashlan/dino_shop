@@ -13,7 +13,14 @@ class DetailScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         var mw = constraints.maxWidth;
-        if (mw <= 500) {
+        if (mw <= 360) {
+          return DetailDino(
+            dino: dino,
+            imageSize: 280,
+            paddingHorizCardDesc: 3,
+            additionalHeight: 50,
+          );
+        } else if (mw <= 500) {
           return DetailDino(
             dino: dino,
             imageSize: 300,
@@ -146,7 +153,8 @@ class DetailDino extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: (size.height / 2) + (kIsWeb ? 100 : 30),
+                height: (size.height / 2) +
+                    (kIsWeb ? 100 : (size.width > 350 ? 30 : 150)),
                 child: Stack(
                   children: [
                     Container(
@@ -154,7 +162,7 @@ class DetailDino extends StatelessWidget {
                         left: paddingHorizCardDesc,
                         right: paddingHorizCardDesc,
                       ),
-                      height: 400,
+                      height: size.width > 350 ? 400 : 600,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -272,6 +280,13 @@ class ButtonBuyAndAmountCounterState extends State<ButtonBuyAndAmountCounter> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    return width > 350
+        ? _normalButtonBuyAndAmount()
+        : _smallButtonBuyAndAmount();
+  }
+
+  Widget _normalButtonBuyAndAmount() {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Row(
@@ -325,7 +340,75 @@ class ButtonBuyAndAmountCounterState extends State<ButtonBuyAndAmountCounter> {
                     ),
                     child: Text(
                       'Buy',
+                      textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _smallButtonBuyAndAmount() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                Transform.scale(
+                  scale: 1.2,
+                  child: IconButton(
+                      icon: Image.asset('images/icons/icon_button_min.png'),
+                      onPressed: () => _decrement()),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  currentAmount.toString(),
+                  style: const TextStyle(
+                    fontSize: 19,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Transform.scale(
+                  scale: 1.2,
+                  child: IconButton(
+                    icon: Image.asset('images/icons/icon_button_plus.png'),
+                    onPressed: () => _increment(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Column(
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () =>
+                      showAlertDialog(context, 'anda mengklik tombol Buy'),
+                  style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(),
+                    backgroundColor: Color(secondaryColor),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      left: 35,
+                      right: 35,
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    child: Text(
+                      'Buy',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 )
