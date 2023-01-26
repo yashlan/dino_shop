@@ -68,10 +68,10 @@ class HeaderAndSearch extends StatelessWidget {
                       RichText(
                         text: TextSpan(
                           children: [
-                            const TextSpan(
+                            TextSpan(
                               text: 'Welcome to\n',
                               style: TextStyle(
-                                fontSize: 27,
+                                fontSize: size.width > 350 ? 27 : 24,
                                 color: Colors.black,
                                 fontFamily: 'RobotoMedium',
                               ),
@@ -79,7 +79,7 @@ class HeaderAndSearch extends StatelessWidget {
                             TextSpan(
                               text: 'Dino Shop',
                               style: TextStyle(
-                                  fontSize: 43,
+                                  fontSize: size.width > 350 ? 43 : 39,
                                   color: Color(secondaryColor),
                                   fontFamily: 'RobotoBold'),
                             ),
@@ -214,6 +214,7 @@ class DinoPlaceGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: ScrollConfiguration(
@@ -232,68 +233,66 @@ class DinoPlaceGrid extends StatelessWidget {
                   return DetailScreen(dino: dino);
                 }));
               },
-              child: Expanded(
-                child: Card(
-                  surfaceTintColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(
-                      width: 2.5,
-                      color: Color(primaryColor),
+              child: Card(
+                surfaceTintColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    width: 2.5,
+                    color: Color(primaryColor),
+                  ),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        dino.imageAsset,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: Image.asset(
-                          dino.imageAsset,
-                          fit: BoxFit.fill,
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
                         ),
+                        color: Color(primaryColor),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(12),
-                            bottomRight: Radius.circular(12),
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              Text(
+                                dino.name,
+                                style: TextStyle(
+                                  fontSize: width > 350 ? 16.0 : 13.0,
+                                  fontFamily: 'RobotoBold',
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
-                          color: Color(primaryColor),
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: [
-                                Text(
-                                  dino.name,
-                                  style: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontFamily: 'RobotoBold',
-                                    color: Colors.white,
-                                  ),
+                          const SizedBox(height: 1),
+                          Row(
+                            children: <Widget>[
+                              const Icon(Icons.monetization_on,
+                                  color: Colors.white),
+                              Text(
+                                dino.price,
+                                style: TextStyle(
+                                  fontSize: width > 350 ? 16.0 : 13.0,
+                                  fontFamily: 'RobotoMedium',
+                                  color: Colors.white,
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 1),
-                            Row(
-                              children: <Widget>[
-                                const Icon(Icons.monetization_on,
-                                    color: Colors.white),
-                                Text(
-                                  dino.price,
-                                  style: const TextStyle(
-                                    fontSize: 14.0,
-                                    fontFamily: 'RobotoMedium',
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );
