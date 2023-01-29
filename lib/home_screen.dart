@@ -101,43 +101,41 @@ class HeaderAndSearch extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: TextField(
-                      style: const TextStyle(fontFamily: 'RobotoRegular'),
-                      controller: _textEditingcontroller,
-                      onTap: () => _textEditingcontroller.clear(),
-                      onChanged: (value) {},
-                      decoration: const InputDecoration(
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: ImageIcon(
-                            AssetImage('images/icons/icon_search.png'),
-                          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: TextField(
+                    style: const TextStyle(fontFamily: 'RobotoRegular'),
+                    controller: _textEditingcontroller,
+                    onTap: () => _textEditingcontroller.clear(),
+                    onChanged: (value) {},
+                    decoration: const InputDecoration(
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: ImageIcon(
+                          AssetImage('images/icons/icon_search.png'),
                         ),
-                        hintText: 'Search',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                        ),
+                      ),
+                      hintText: 'Search',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
                     ),
                   ),
                 ),
-                Transform.scale(
-                  scale: 1.8,
-                  child: IconButton(
-                    splashRadius: 1,
-                    onPressed: () => showAlertDialog(
-                        context, 'anda mengklik filter search button'),
-                    icon: Image.asset('images/icons/icon_filter_search.png'),
-                  ),
+              ),
+              Transform.scale(
+                scale: 1.8,
+                child: IconButton(
+                  splashRadius: 1,
+                  onPressed: () => showAlertDialog(
+                      context, 'anda mengklik filter search button'),
+                  icon: Image.asset('images/icons/icon_filter_search.png'),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
